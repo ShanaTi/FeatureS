@@ -4,8 +4,7 @@ Calc::Calc(vector<Data> d){
     data = d;
 }
 
-
-double Calc::NNalgo(vector<int> current){
+double Calc::NNalgo(vector<int> current){ //nearest neighbor algo
     double correct = 0;
     double total = 0;
     double tempDist = 0;
@@ -20,7 +19,7 @@ double Calc::NNalgo(vector<int> current){
                 continue;
             }
             tempDist = 0;
-            for (unsigned k = 0; k < current.size(); k++){
+            for (unsigned k = 0; k < current.size(); k++){ 
                 tempDist += pow(data.at(i).getFeatures().at(current.at(k)) - data.at(j).getFeatures().at(current.at(k)), 2);
             }
 

@@ -1,7 +1,6 @@
-#include <iostream>
-#include <sstream>
-#include <fstream>
 #include "data.h"
+#include "calc.h"
+#include "results.h"
 using namespace std;
 
 vector <Data> transfer(string dataFile); // reads in features from input file
@@ -13,18 +12,31 @@ int main(int argc, char*argv[]){
     }
     string hold(argv[0]);
     string input(argv[1]);
-    cout << input << endl;;
+    cout << "filename: " << input << endl;;
     vector<Data> d = transfer(input);
-    cout << d.size() << endl;
-    for (unsigned i = 0; i < d.size(); i++){
-        d.at(i).outputFeatures();
-        cout << endl;
+    int size = d.at(0).getFeatures().size();
+    Calc c(d);
+    Algo r;
+    char choice;
+    cout  << "Which algorithm do you want to use?" << endl;
+    cout << "`1` Forward Selection" << endl;
+    cout << "`2` Backward Selection" << endl;
+    cin >> choice;
+
+    if (choice == '1'){
+        r.forward(c, size);
     }
+    else if (choice == '2'){
+        r.backward(c, size);
+    }
+    
+    
+
     return 0;
 }
 
 
-vector <Data> transfer(string dataFile){
+vector <Data> transfer(string dataFile){ //read in data
     ifstream inStr;
     inStr.open(dataFile.c_str());
 
